@@ -1,0 +1,1050 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(200, 100%, 99%);
+  --foreground: hsl(209, 49%, 16%);
+  --muted: hsl(198, 83%, 93%);
+  --muted-foreground: hsl(207, 18%, 46%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(209, 49%, 16%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(209, 49%, 16%);
+  --border: hsl(198, 77%, 84%);
+  --input: hsl(198, 77%, 84%);
+  --primary: hsl(198, 92%, 63%);
+  --primary-foreground: hsl(209, 56%, 18%);
+  --secondary: hsl(199, 80%, 91%);
+  --secondary-foreground: hsl(209, 49%, 16%);
+  --accent: hsl(198, 92%, 63%);
+  --accent-foreground: hsl(209, 56%, 18%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(198, 92%, 63%);
+  --radius: 12px;
+}
+
+.dark {
+  --background: hsl(207, 52%, 11%);
+  --foreground: hsl(0, 0%, 100%);
+  --muted: hsl(205, 41%, 19%);
+  --muted-foreground: hsl(198, 48%, 78%);
+  --popover: hsl(207, 52%, 11%);
+  --popover-foreground: hsl(0, 0%, 100%);
+  --card: hsl(207, 52%, 11%);
+  --card-foreground: hsl(0, 0%, 100%);
+  --border: hsl(203, 41%, 24%);
+  --input: hsl(203, 41%, 24%);
+  --primary: hsl(198, 92%, 71%);
+  --primary-foreground: hsl(209, 56%, 18%);
+  --secondary: hsl(205, 41%, 19%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --accent: hsl(198, 92%, 71%);
+  --accent-foreground: hsl(209, 56%, 18%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(198, 92%, 71%);
+  --radius: 12px;
+}
+
+/* Mobile responsive improvements while keeping simple design */
+@media (max-width: 768px) {
+  button, 
+  input[type="button"], 
+  input[type="submit"], 
+  select {
+    min-height: 44px;
+  }
+  
+  /* Prevent zoom on input focus on iOS */
+  input[type="text"],
+  input[type="url"],
+  input[type="email"],
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-inter antialiased bg-background text-foreground;
+  }
+}
+
+.font-inter {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Hamish Williams Theme Toggle */
+.theme-toggle {
+  --offset: 6px;
+  --button-size: 44px;
+  
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--button-size);
+  height: var(--button-size);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: hsl(var(--foreground));
+}
+
+.theme-toggle:hover {
+  background: hsl(var(--muted));
+  transform: scale(1.05);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+.theme-toggle-svg {
+  width: 38px;
+  height: 38px;
+}
+
+.theme-toggle-circle {
+  fill: currentColor;
+  transform: scale(0.6);
+  transform-origin: center;
+  transition-property: transform, fill;
+  transition-duration: 0.6s;
+  transition-delay: 0s;
+  transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.theme-toggle-circle[data-mask="true"] {
+  fill: white;
+}
+
+[data-theme="dark"] .theme-toggle-circle {
+  transform: none;
+  transition-delay: 0.3s;
+}
+
+.theme-toggle-mask {
+  fill: black;
+  transform: translate3d(100%, -100%, 0);
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+  transition-delay: 0s;
+}
+
+[data-theme="dark"] .theme-toggle-mask {
+  transform: none;
+  transition-delay: 0.3s;
+}
+
+.theme-toggle-path {
+  stroke: currentColor;
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 3;
+  stroke-dasharray: 7 7;
+  stroke-dashoffset: 0;
+  opacity: 1;
+  transition-property: stroke-dashoffset, opacity;
+  transition-duration: 0.6s;
+  transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  transition-delay: 0.3s;
+}
+
+[data-theme="dark"] .theme-toggle-path {
+  stroke-dashoffset: 7;
+  opacity: 0;
+  transition-delay: 0s;
+}
+
+/* Author Link Hover Animation - Simple Underline */
+a.author-link {
+  position: relative !important;
+  display: inline-block !important;
+  text-decoration: none !important;
+}
+
+a.author-link::before {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  left: 0 !important;
+  width: 0% !important;
+  height: 2px !important;
+  background: hsl(var(--primary)) !important;
+  transition: width 0.3s ease !important;
+}
+
+a.author-link:hover::before {
+  width: 100% !important;
+}
+
+/* Enhanced mobile responsiveness for author link */
+@media (max-width: 640px) {
+  .author-link::after {
+    height: 1.5px;
+    bottom: -1px;
+  }
+}
+
+/* Light mode author link styling */
+.author-link {
+  color: #000000 !important;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 640px) {
+  .theme-toggle {
+    --button-size: 40px;
+  }
+  
+  .theme-toggle-svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Custom colors for dark mode */
+.dark .author-link {
+  color: #FFFFFF !important;
+}
+
+.dark .author-link:hover {
+  color: #7dd3fc !important;
+}
+
+.dark .author-link .group-hover\:w-full {
+  background-color: #7dd3fc !important;
+}
+
+/* Send button and primary buttons in dark mode */
+.dark button[class*="bg-primary"],
+.dark .bg-primary {
+  background-color: #7dd3fc !important;
+  color: #082f49 !important;
+  border-color: #7dd3fc !important;
+}
+
+.dark button[class*="bg-primary"]:hover,
+.dark .bg-primary:hover,
+.dark button[class*="hover:bg-primary"]:hover {
+  background-color: #38bdf8 !important;
+  color: #082f49 !important;
+}
+
+/* Voice reading button in dark mode */
+.dark button[class*="bg-accent"],
+.dark .bg-accent {
+  background-color: #7dd3fc !important;
+  color: #082f49 !important;
+  border-color: #7dd3fc !important;
+}
+
+.dark button[class*="bg-accent"]:hover,
+.dark .bg-accent:hover,
+.dark button[class*="hover:bg-accent"]:hover {
+  background-color: #38bdf8 !important;
+  color: #082f49 !important;
+}
+
+/* Copy button styling for dark mode */
+.dark button[class*="bg-muted"],
+.dark .bg-muted {
+  background-color: #7dd3fc !important;
+  color: #082f49 !important;
+  border-color: #7dd3fc !important;
+}
+
+.dark button[class*="bg-muted"]:hover,
+.dark .bg-muted:hover,
+.dark button[class*="hover:bg-muted"]:hover {
+  background-color: #38bdf8 !important;
+  color: #082f49 !important;
+}
+
+/* Light mode button styling */
+button[class*="bg-accent"],
+.bg-accent {
+  background-color: #7dd3fc !important;
+  color: #082f49 !important;
+  border-color: #7dd3fc !important;
+}
+
+button[class*="bg-accent"]:hover,
+.bg-accent:hover,
+button[class*="hover:bg-accent"]:hover {
+  background-color: #38bdf8 !important;
+  color: #082f49 !important;
+}
+
+button[class*="bg-muted"],
+.bg-muted {
+  background-color: #7dd3fc !important;
+  color: #082f49 !important;
+  border-color: #7dd3fc !important;
+}
+
+button[class*="bg-muted"]:hover,
+.bg-muted:hover,
+button[class*="hover:bg-muted"]:hover {
+  background-color: #38bdf8 !important;
+  color: #082f49 !important;
+}
+
+/* Fix accent text readability in light mode */
+.text-accent {
+  color: #0ea5e9 !important;
+}
+
+/* Logo color overrides for theme compatibility */
+.logo-base {
+  filter: none;
+}
+
+.dark .logo-base {
+  filter: none;
+}
+
+/* Logo hover effect styles - Mask overlay for precise shape fill */
+.logo-container {
+  cursor: default;
+  position: relative;
+  display: inline-block;
+}
+
+.logo-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.logo-base {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.logo-fill-overlay {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #7dd3fc;
+  mask: url("/logo.svg") no-repeat center / contain;
+  -webkit-mask: url("/logo.svg") no-repeat center / contain;
+}
+
+/* Key Points styling for dark mode */
+.dark .text-primary {
+  color: #7dd3fc !important;
+}
+
+.dark .bg-primary {
+  background-color: #7dd3fc !important;
+}
+
+.dark .text-primary-foreground {
+  color: #082f49 !important;
+}
+
+.dark .border-primary\/20 {
+  border-color: rgba(125, 211, 252, 0.22) !important;
+}
+
+.dark .bg-primary\/10 {
+  background-color: rgba(125, 211, 252, 0.14) !important;
+}
+
+/* Modern custom scrollbar for dropdown - Light mode */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(125, 211, 252, 0.45) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, rgba(125, 211, 252, 0.55), rgba(56, 189, 248, 0.8));
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(14, 165, 233, 0.15);
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.85), rgba(14, 165, 233, 1));
+  box-shadow: 0 4px 8px rgba(14, 165, 233, 0.24);
+  transform: scaleX(1.2);
+}
+
+/* Dark mode modern scrollbar */
+.dark .scrollbar-thin {
+  scrollbar-color: rgba(125, 211, 252, 0.45) transparent;
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, rgba(125, 211, 252, 0.45), rgba(56, 189, 248, 0.72));
+  box-shadow: 0 2px 4px rgba(125, 211, 252, 0.18);
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, rgba(125, 211, 252, 0.75), rgba(56, 189, 248, 0.95));
+  box-shadow: 0 4px 8px rgba(125, 211, 252, 0.24);
+}
+
+/* Override dropdown selected item colors to use proper primary colors */
+.language-dropdown .bg-primary\/10 {
+  background-color: hsl(var(--primary) / 0.1) !important;
+}
+
+.language-dropdown .text-primary {
+  color: hsl(var(--primary)) !important;
+}
+
+.dark .language-dropdown .bg-primary\/10 {
+  background-color: hsl(var(--primary) / 0.15) !important;
+}
+
+.dark .language-dropdown .text-primary {
+  color: hsl(var(--primary)) !important;
+}
+
+/* Light mode dropdown styling */
+.language-dropdown button {
+  color: hsl(var(--foreground)) !important;
+  background-color: transparent !important;
+}
+
+.language-dropdown .dropdown-trigger {
+  color: hsl(var(--foreground)) !important;
+  background-color: hsl(var(--background)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+.language-dropdown .dropdown-trigger:hover {
+  border-color: #7dd3fc !important;
+}
+
+.language-dropdown .dropdown-trigger:focus {
+  --tw-ring-color: rgb(125, 211, 252) !important;
+}
+
+/* Force dropdown panel to have proper light colors */
+.language-dropdown > div {
+  background-color: #FFFFFF !important;
+  border-color: hsl(var(--border)) !important;
+  color: #000000 !important;
+}
+
+.language-dropdown .dropdown-panel {
+  background-color: #FFFFFF !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+/* Force all dropdown buttons to have proper colors */
+.language-dropdown button:not(.dropdown-trigger) {
+  background-color: transparent !important;
+  color: #000000 !important;
+}
+
+.language-dropdown .dropdown-item {
+  background-color: transparent !important;
+  color: #000000 !important;
+}
+
+/* Individual hover effect - dark background with white text */
+.language-dropdown button:not(.dropdown-trigger):hover {
+  background-color: #7dd3fc !important;
+  color: #082f49 !important;
+}
+
+.language-dropdown .dropdown-item:hover {
+  background-color: #7dd3fc !important;
+  color: #082f49 !important;
+}
+
+/* Selected item should be purple in light mode */
+.language-dropdown button.bg-primary\/10 {
+  background-color: rgba(125, 211, 252, 0.18) !important;
+  color: rgb(14, 165, 233) !important;
+}
+
+.language-dropdown .selected-item {
+  background-color: rgba(125, 211, 252, 0.18) !important;
+  color: rgb(14, 165, 233) !important;
+}
+
+/* Selected item hover - still dark background with white text */
+.language-dropdown button.bg-primary\/10:hover {
+  background-color: #7dd3fc !important;
+  color: #082f49 !important;
+}
+
+.language-dropdown .selected-item:hover {
+  background-color: #7dd3fc !important;
+  color: #082f49 !important;
+}
+
+/* Dark mode dropdown styling - restored original behavior */
+.dark .language-dropdown button {
+  color: hsl(var(--foreground)) !important;
+  background-color: transparent !important;
+}
+
+.dark .language-dropdown .dropdown-trigger {
+  color: hsl(var(--foreground)) !important;
+  background-color: hsl(var(--background)) !important;
+  border-color: transparent !important;
+}
+
+.dark .language-dropdown .dropdown-trigger:hover {
+  border-color: #7dd3fc !important;
+}
+
+.dark .language-dropdown .dropdown-trigger:focus {
+  --tw-ring-color: rgb(125, 211, 252) !important;
+}
+
+/* Force dropdown panel to have proper dark colors */
+.dark .language-dropdown > div {
+  background-color: #000000 !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
+}
+
+.dark .language-dropdown .dropdown-panel {
+  background-color: #000000 !important;
+  border-color: transparent !important;
+}
+
+/* Force all dropdown buttons to have proper colors */
+.dark .language-dropdown button:not(.dropdown-trigger) {
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+.dark .language-dropdown .dropdown-item {
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+/* Individual hover effect - cyan background with black text */
+.dark .language-dropdown button:not(.dropdown-trigger):hover {
+  background-color: #7dd3fc !important;
+  color: #082f49 !important;
+}
+
+.dark .language-dropdown .dropdown-item:hover {
+  background-color: #7dd3fc !important;
+  color: #082f49 !important;
+}
+
+/* Selected item should be purple, not cyan */
+.dark .language-dropdown button.bg-primary\/10 {
+  background-color: rgba(125, 211, 252, 0.2) !important;
+  color: rgb(125, 211, 252) !important;
+}
+
+.dark .language-dropdown .selected-item {
+  background-color: rgba(125, 211, 252, 0.2) !important;
+  color: rgb(125, 211, 252) !important;
+}
+
+/* Selected item hover - still cyan background with black text */
+.dark .language-dropdown button.bg-primary\/10:hover {
+  background-color: #7dd3fc !important;
+  color: #082f49 !important;
+}
+
+.dark .language-dropdown .selected-item:hover {
+  background-color: #7dd3fc !important;
+  color: #082f49 !important;
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 12% 12%, rgba(125, 211, 252, 0.26), transparent 28%),
+    radial-gradient(circle at 88% 4%, rgba(186, 230, 253, 0.36), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(240, 249, 255, 0.96));
+  background-attachment: fixed;
+}
+
+.dark body {
+  background-image:
+    radial-gradient(circle at 10% 10%, rgba(56, 189, 248, 0.18), transparent 24%),
+    radial-gradient(circle at 90% 0%, rgba(125, 211, 252, 0.14), transparent 22%),
+    linear-gradient(180deg, rgba(8, 47, 73, 0.96), rgba(7, 23, 39, 0.98));
+}
+
+.app-shell {
+  position: relative;
+  overflow-x: hidden;
+}
+
+.app-shell::before,
+.app-shell::after {
+  content: "";
+  position: absolute;
+  inset: auto;
+  border-radius: 999px;
+  pointer-events: none;
+  filter: blur(40px);
+  opacity: 0.45;
+}
+
+.app-shell::before {
+  top: 5rem;
+  right: -5rem;
+  width: 16rem;
+  height: 16rem;
+  background: rgba(125, 211, 252, 0.32);
+}
+
+.app-shell::after {
+  bottom: 7rem;
+  left: -4rem;
+  width: 14rem;
+  height: 14rem;
+  background: rgba(186, 230, 253, 0.3);
+}
+
+.surface-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid hsl(var(--border) / 0.72);
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(240, 249, 255, 0.86));
+  box-shadow:
+    0 24px 60px rgba(14, 165, 233, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(18px);
+}
+
+.surface-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), transparent 32%);
+  pointer-events: none;
+}
+
+.dark .surface-card {
+  background: linear-gradient(180deg, rgba(8, 47, 73, 0.76), rgba(15, 23, 42, 0.84));
+  box-shadow:
+    0 24px 60px rgba(2, 6, 23, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.logo-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem;
+  border-radius: 1.35rem;
+  border: 1px solid hsl(var(--border) / 0.7);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(224, 242, 254, 0.88));
+  box-shadow: 0 14px 35px rgba(14, 165, 233, 0.14);
+}
+
+.dark .logo-frame {
+  background: linear-gradient(180deg, rgba(8, 47, 73, 0.9), rgba(15, 23, 42, 0.84));
+  box-shadow: 0 16px 38px rgba(2, 6, 23, 0.3);
+}
+
+.section-kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #0ea5e9;
+}
+
+.info-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid hsl(var(--border) / 0.7);
+  background: rgba(255, 255, 255, 0.8);
+  color: hsl(var(--foreground));
+  font-size: 0.84rem;
+  font-weight: 600;
+  box-shadow: 0 10px 28px rgba(14, 165, 233, 0.08);
+}
+
+.dark .info-pill {
+  background: rgba(8, 47, 73, 0.52);
+  box-shadow: 0 10px 28px rgba(2, 6, 23, 0.18);
+}
+
+.feature-chip {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.9rem 1rem;
+  min-width: 9.5rem;
+  border-radius: 1.2rem;
+  border: 1px solid hsl(var(--border) / 0.7);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 12px 30px rgba(14, 165, 233, 0.08);
+}
+
+.dark .feature-chip {
+  background: rgba(8, 47, 73, 0.52);
+  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.2);
+}
+
+.feature-chip-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+.feature-chip-value {
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+.feature-card {
+  padding: 1.35rem;
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  background: rgba(125, 211, 252, 0.18);
+  color: #0ea5e9;
+}
+
+.dark .feature-icon {
+  background: rgba(125, 211, 252, 0.16);
+  color: #7dd3fc;
+}
+
+.hero-panel {
+  padding: 1.5rem;
+}
+
+.mode-switch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  padding: 0.35rem;
+  border-radius: 999px;
+  border: 1px solid hsl(var(--border) / 0.8);
+  background: hsl(var(--secondary) / 0.7);
+}
+
+.mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.mode-toggle:hover {
+  color: hsl(var(--foreground));
+}
+
+.mode-toggle.active {
+  background: rgba(255, 255, 255, 0.96);
+  color: hsl(var(--foreground));
+  box-shadow: 0 10px 24px rgba(14, 165, 233, 0.12);
+}
+
+.dark .mode-toggle.active {
+  background: rgba(125, 211, 252, 0.16);
+  box-shadow: none;
+}
+
+.input-shell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3.65rem;
+  padding: 0 1rem;
+  border: 1px solid hsl(var(--border) / 0.8);
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.dark .input-shell {
+  background: rgba(8, 47, 73, 0.58);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.input-shell:focus-within {
+  border-color: hsl(var(--primary));
+  box-shadow:
+    0 0 0 4px rgba(125, 211, 252, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.hero-input {
+  height: 3.25rem !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.hero-input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.upload-zone {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem;
+  border: 1px dashed hsl(var(--border) / 0.9);
+  border-radius: 1.35rem;
+  background: linear-gradient(180deg, rgba(224, 242, 254, 0.46), rgba(255, 255, 255, 0.62));
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.upload-zone:hover {
+  transform: translateY(-1px);
+  border-color: hsl(var(--primary));
+  box-shadow: 0 16px 34px rgba(14, 165, 233, 0.12);
+}
+
+.dark .upload-zone {
+  background: linear-gradient(180deg, rgba(8, 47, 73, 0.58), rgba(15, 23, 42, 0.48));
+}
+
+.upload-zone-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 1rem;
+  background: rgba(125, 211, 252, 0.2);
+  color: #0ea5e9;
+  flex-shrink: 0;
+}
+
+.dark .upload-zone-icon {
+  color: #7dd3fc;
+}
+
+.selected-file-pill,
+.empty-upload-state {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid hsl(var(--border) / 0.7);
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.dark .selected-file-pill,
+.dark .empty-upload-state {
+  background: rgba(8, 47, 73, 0.52);
+}
+
+.empty-upload-state {
+  justify-content: center;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.92rem;
+}
+
+.metric-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 1rem;
+  border-radius: 1.15rem;
+  border: 1px solid hsl(var(--border) / 0.72);
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.dark .metric-card {
+  background: rgba(8, 47, 73, 0.5);
+}
+
+.metric-card-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+}
+
+.metric-card-label {
+  font-size: 0.8rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.loading-strip {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 0.52rem;
+  border-radius: 999px;
+  background: rgba(125, 211, 252, 0.18);
+}
+
+.loading-strip-bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 45%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7dd3fc, #0ea5e9);
+  animation: loading-slide 1.25s ease-in-out infinite;
+}
+
+.result-hero-fallback {
+  height: 10rem;
+  background:
+    radial-gradient(circle at top left, rgba(125, 211, 252, 0.65), transparent 30%),
+    linear-gradient(135deg, rgba(224, 242, 254, 0.95), rgba(125, 211, 252, 0.4));
+}
+
+.dark .result-hero-fallback {
+  background:
+    radial-gradient(circle at top left, rgba(125, 211, 252, 0.36), transparent 28%),
+    linear-gradient(135deg, rgba(8, 47, 73, 0.92), rgba(14, 165, 233, 0.24));
+}
+
+.summary-copy {
+  font-size: 1.02rem;
+  line-height: 1.95;
+  color: hsl(var(--foreground) / 0.92);
+}
+
+.key-point-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1.2rem;
+  border: 1px solid hsl(var(--border) / 0.68);
+  background: rgba(255, 255, 255, 0.64);
+}
+
+.dark .key-point-row {
+  background: rgba(8, 47, 73, 0.46);
+}
+
+.key-point-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: hsl(var(--primary));
+  color: #082f49;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.metric-stack-card {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1.15rem;
+  border: 1px solid hsl(var(--border) / 0.68);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.dark .metric-stack-card {
+  background: rgba(8, 47, 73, 0.48);
+}
+
+.metric-stack-label {
+  font-size: 0.88rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.metric-stack-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+}
+
+.social-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 999px;
+  border: 1px solid hsl(var(--border) / 0.75);
+  background: rgba(255, 255, 255, 0.8);
+  color: hsl(var(--muted-foreground));
+  transition: transform 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.social-icon-link:hover {
+  transform: translateY(-2px);
+  color: #0ea5e9;
+  border-color: #7dd3fc;
+}
+
+.dark .social-icon-link {
+  background: rgba(8, 47, 73, 0.48);
+}
+
+@keyframes loading-slide {
+  0% {
+    transform: translateX(-110%);
+  }
+  50% {
+    transform: translateX(110%);
+  }
+  100% {
+    transform: translateX(260%);
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-panel {
+    padding: 1.75rem;
+  }
+
+  .summary-copy {
+    font-size: 1.08rem;
+  }
+}
